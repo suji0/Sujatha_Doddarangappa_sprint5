@@ -1,0 +1,52 @@
+<app-header></app-header>
+<div class="task">
+  <form [formGroup]='formGroup' (ngSubmit)="onSubmit($event)">
+    <div class="row pl-5 pb-3" style='background-color: white;'>
+      <div class="col-8">
+        {{taskName}}
+      </div>
+      <div class='col-4'>
+        <button type="button" (click)='onCancel()'> Cancel</button>
+        <button type="submit"> Save</button>
+        <button  *ngIf='isEdit' calss='ml-2'  type="button" (click)="onDelete()"> Delete</button>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-2 ml-5">
+        Project
+      </div>
+      <div class="col-3">
+        <select formControlName='projectName'>
+          <option value="{{project.id}}" *ngFor= "let project of projects">{{project.name}}</option>
+        </select>
+      </div>
+      <div class="col-2 ml-5">
+        Assigned to User
+      </div>
+      <div class="col-3">
+        <select formControlName='userName'>
+          <option value="{{user.id}}" *ngFor= "let user of users" >{{user.firstName}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="row mt-4" *ngIf='isEdit'>
+      <div class="col-2 ml-5">
+        Status
+      </div>
+      <div class="col-3">
+        <select formControlName='status'>
+          <option *ngFor= "let state of status  | keyvalue" value="{{state.value}}">{{state.value}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col-2 ml-5">
+        Details
+      </div>
+      <div class="col-3">
+        <input type="textarea" formControlName="details" />
+      </div>
+    </div>
+  </form>
+</div>
